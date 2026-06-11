@@ -17,11 +17,6 @@ def validate_menu_option(option):
     if not option:
         return False
     
-    if not option.isdigit():
-        return False
-    
-    option = int(option)
-
     if not 0 < option < 6:
         return False
     
@@ -29,12 +24,10 @@ def validate_menu_option(option):
 
 
 def validate_days(days):
-    if not days.isdigit():
+    if not days:
         return False
-    
-    days = int(days)
 
-    if not 0 < days <= 10:
+    if not 0 < days <= 14:
         return False
     
     return True
