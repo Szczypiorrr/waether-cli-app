@@ -26,3 +26,38 @@ def get_current_weather(city):
     else:
         print(f"Error: {response.status_code} - {response.text}")
         return None
+
+
+def get_weather_forecast(city, days):
+    url = f"{base_url}/forecast.json"
+
+    params = {
+        "key": API_KEY,
+        "q": city,
+        "days": days
+    }    
+
+    response = requests.get(url, params=params)
+
+    if response.status_code == 200:
+        data = response.json()
+        
+        forecast_days = data["forecast"]["forecastday"]
+
+        result = []
+
+        for day in forecast_days:
+            date = day["date"]
+            temp = day["day"]["avgtemp_c"]
+            condition = day["day"]["condition"]["text"]
+
+            result.append({
+                "date": date,
+                "temp": temp,
+                "condition": condition
+            })
+
+        return result
+    else:
+        print(f"Error: {response.status_code} - {response.text}")
+        return None
