@@ -23,6 +23,10 @@ def print_header():
 
 def print_default_weather():
     default_city = load_default_city()
+    if default_city is None:
+        print("Failed to load default city, using 'Warsaw'")
+        default_city = "Warsaw"
+
     print(f"Default city: {default_city}\n")
     print("Current weather:")
 
@@ -136,7 +140,15 @@ def generate_menu():
 
     elif selected_option == 3:
         default_city = load_default_city()
+        if default_city is None:
+            print("Failed to load default city, using 'Warsaw'")
+            default_city = "Warsaw"
+
         default_days = load_default_days()
+
+        if default_days is None:
+            print("Failed to load default number of days, using 7")
+            default_days = 7
 
         weather = get_weather_forecast(default_city, default_days)
 
