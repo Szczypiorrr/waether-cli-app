@@ -103,6 +103,10 @@ def generate_menu():
             error_and_return("Invalid entered city")
 
         weather = get_current_weather(city)
+
+        if not weather:
+            error_and_return("An error occurred while fetching weather data.")
+
         print(f"Temperature: {weather.temperature}°C")
         print(f"Condition: {weather.condition}")
 
@@ -121,10 +125,12 @@ def generate_menu():
 
         weather = get_weather_forecast(city, days)
 
-        if weather:
-            print(f"\n{days}-day weather forecast for {city}:\n")
-            for day in weather:
-                print(f"{day["date"]}: {day["temp"]}°C {day["condition"]}")
+        if not weather:
+            error_and_return("An error occurred while fetching weather data.")
+
+        print(f"\n{days}-day weather forecast for {city}:\n")
+        for day in weather:
+            print(f"{day["date"]}: {day["temp"]}°C {day["condition"]}")
 
         wait_and_return()
 
