@@ -1,5 +1,5 @@
 import json
-from validator import validate_days, validate_city
+from services.validator import validate_days, validate_city
 
 def load_default_city():
     with open("data/settings.json", "r") as f:
