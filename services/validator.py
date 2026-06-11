@@ -13,11 +13,11 @@ def validate_city(city):
     
     return True
 
-def validate_menu_option(option):
+def validate_menu_option(option, max_number):
     if not option:
         return False
     
-    if not 0 < option < 6:
+    if not 0 < option <= max_number:
         return False
     
     return True
