@@ -1,6 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
+from models.weather import Weather
 
 load_dotenv()
 
@@ -18,8 +19,10 @@ def get_current_weather(city):
     response = requests.get(url, params=params)
 
     if response.status_code == 200:
-        return response.json()
+        data = response.json()
+
+        weather = Weather(data["location"]["name"], data["current"]["temp_c"], data["current"]["condition"]["text"])
+        return weather
     else:
         print(f"Error: {response.status_code} - {response.text}")
         return None
-
