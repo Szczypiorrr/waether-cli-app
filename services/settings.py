@@ -2,6 +2,10 @@ import json
 from services.validator import validate_days, validate_city
 
 def load_default_city():
+    """
+    Loads default city from settings.json file.
+    Returns None if file does not exist.
+    """
     try:
         with open("data/settings.json", "r") as f:
             data = json.load(f)
@@ -12,6 +16,10 @@ def load_default_city():
         return None
     
 def load_default_days():
+    """
+    Loads default forecast days from settings.json file.
+    Returns None if file does not exist.
+    """
     try:
         with open("data/settings.json", "r") as f:
             data = json.load(f)
@@ -22,6 +30,9 @@ def load_default_days():
         return None
 
 def save_default_city(city):
+    """
+    Saves default city to settings.json file.
+    """
     if not validate_city(city):
         return
     
@@ -38,6 +49,9 @@ def save_default_city(city):
 
 
 def save_default_days(days):
+    """
+    Saves default forecast days to settings.json file.
+    """
     if not validate_days(days):
         return
     

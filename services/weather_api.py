@@ -9,6 +9,10 @@ base_url = "http://api.weatherapi.com/v1"
 API_KEY = os.getenv('WEATHER_API_KEY')
 
 def get_current_weather(city):
+    """
+    Fetches current weather data for a given city from WeatherAPI.
+    Returns Weather object or None if request fails.
+    """
     url = f"{base_url}/current.json"
 
     params = {
@@ -29,6 +33,10 @@ def get_current_weather(city):
 
 
 def get_weather_forecast(city, days):
+    """
+    Fetches weather forecast for a given city and number of days.
+    Returns list of dicts with date, temperature and condition.
+    """
     url = f"{base_url}/forecast.json"
 
     params = {

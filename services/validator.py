@@ -1,6 +1,9 @@
 import re
 
 def validate_city(city):
+    """
+    Checks if city name is valid (not empty and only letters/spaces).
+    """
     city = city.strip()
 
     if not city:
@@ -14,6 +17,9 @@ def validate_city(city):
     return True
 
 def validate_menu_option(option, max_number):
+    """
+    Validates if menu option is within allowed range.
+    """
     if not option:
         return False
     
@@ -24,6 +30,9 @@ def validate_menu_option(option, max_number):
 
 
 def validate_days(days):
+    """
+    Validates number of forecast days (1–14 range).
+    """
     if not days:
         return False
 

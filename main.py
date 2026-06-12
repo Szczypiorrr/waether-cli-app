@@ -4,24 +4,29 @@ import time
 from services.validator import validate_menu_option, validate_city, validate_days
 
 def error_and_return(message, delay=3):
+    """Print error message and return to main menu after delay."""
     print(message)
     time.sleep(delay)
     generate_menu()
 
 def wait_and_return(delay=5):
+    """Small delay before returning to main menu."""
     time.sleep(delay)
     generate_menu()
 
 def wait_and_return_settings(delay=3):
+    """Delay before returning to settings menu."""
     time.sleep(delay)
     settings_menu()
 
 def print_header():
+    """Prints application header."""
     print("=================================")
     print("        WEATHER CLI APP")
     print("=================================\n")
 
 def print_default_weather():
+    """Displays default city weather on startup."""
     default_city = load_default_city()
     if default_city is None:
         print("Failed to load default city, using 'Warsaw'")
@@ -35,48 +40,50 @@ def print_default_weather():
     print(f"Condition: {default_weather.condition}")
 
 def settings_menu():
-        print("\nSELECT OPTION")
-        print("1. Set default city")
-        print("2. Set default forecast days")
-        print("3. Return to main menu")
+    """Settings menu for updating default city and forecast days."""
+    print("\nSELECT OPTION")
+    print("1. Set default city")
+    print("2. Set default forecast days")
+    print("3. Return to main menu")
 
-        try:
-            selected_option = int(input("Enter selected number: "))
-        except ValueError:
-            error_and_return("Invalid type of data, must be a number.")
-        except:
-            error_and_return("An unexpected error occurred")
+    try:
+        selected_option = int(input("Enter selected number: "))
+    except ValueError:
+        error_and_return("Invalid type of data, must be a number.")
+    except:
+        error_and_return("An unexpected error occurred")
 
-        if not validate_menu_option(selected_option, 3):
-            error_and_return("The number must be between 1-3")
+    if not validate_menu_option(selected_option, 3):
+        error_and_return("The number must be between 1-3")
 
-        if selected_option == 1:
-            city = input("Enter name of city you want to set as default: ")
-            if not validate_city(city):
-                error_and_return("Invalid entered city")
+    if selected_option == 1:
+        city = input("Enter name of city you want to set as default: ")
+        if not validate_city(city):
+            error_and_return("Invalid entered city")
 
-            save_default_city(city)
-            
-            print("Default city has been changed succesfully")
+        save_default_city(city)
+        
+        print("Default city has been changed succesfully")
 
-            wait_and_return_settings()
+        wait_and_return_settings()
 
-        if selected_option == 2:
-            days = int(input("Enter the number of days you want to set as default: "))
-            
-            if not validate_days(days):
-                error_and_return("Invalid number of days, must be between 1-14")
+    if selected_option == 2:
+        days = int(input("Enter the number of days you want to set as default: "))
+        
+        if not validate_days(days):
+            error_and_return("Invalid number of days, must be between 1-14")
 
-            save_default_days(days)
-            
-            print("Default number of days has been changed succesfully")
+        save_default_days(days)
+        
+        print("Default number of days has been changed succesfully")
 
-            wait_and_return_settings()
+        wait_and_return_settings()
 
-        if selected_option == 3:
-            generate_menu()
+    if selected_option == 3:
+        generate_menu()
 
 def generate_menu():
+    """Main CLI menu for weather application."""
     print_header()
     print_default_weather()
     
